@@ -53,13 +53,32 @@ public class Estado {
 
     public String toString() {
 
-        return "Catalago{" + "id=" + id + ", estado=" + nombreEstado + "municipio" + nombreMunicipio + '}';
+        return "Catalago{" + "id=" + id + ", estado=" + nombreEstado + " ,municipio=" + nombreMunicipio + '}';
 
     }
     public static ArrayList<Estado> catalago = new ArrayList<>();
 
+    public static void lista() {
+
+        for (int i = 0; i < catalago.size(); i++) {
+            System.out.println(catalago.get(i).toString());
+        }
+    }
+    
+    public static void llenar() {
+        catalago.add(new Estado(1, "Campeche","Champoton"));
+        catalago.add(new Estado(2, "Campeche","Carmen"));
+        catalago.add(new Estado(3, "Campeche","Escarcega"));
+        catalago.add(new Estado(4, "Campeche","Calkini"));
+        catalago.add(new Estado(5, "Campeche","Hecelchakan"));
+        catalago.add(new Estado(6, "Campeche","Seybaplaya"));
+        System.out.println(catalago);
+
+    }
+
     public static void añadir(int id, String nombreEstado, String nombreMunicipio) {
         catalago.add(new Estado(id, nombreEstado, nombreMunicipio));
+        System.out.println(catalago);
     }
 
     public static void actualizar(int recNo, int id, String nombreEstado, String nombreMunicipio) {
@@ -72,5 +91,5 @@ public class Estado {
     public static void eliminar(int id) {
         catalago.remove(id);
     }
-    
+
 }

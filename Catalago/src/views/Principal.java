@@ -5,6 +5,8 @@
 package views;
 
 import javax.swing.table.DefaultTableModel;
+import models.Estado;
+import static models.Estado.catalago;
 
 /**
  *
@@ -19,12 +21,44 @@ public class Principal extends javax.swing.JFrame {
         }
     };
  
-
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.txtRecNo.setText("-1");
+        this.txtRecNo.setVisible(false);
+        this.cartelrecNo.setVisible(false);
+        Estado.llenar();
+        tblCatalago.repaint();
+        setModelo();
+        setDatos();
+    }
+    private void limpiarCampos() {
+        this.txtId.setText("");
+        this.txtEstado.setText("");
+        this.txtMunicipio.setText("");
+        this.txtRecNo.setText("-1");
+    }
+
+    private void setModelo() {
+        String[] tlbCabecera = {"No", "ID", "MUNICIPIO", "ESTADO"};
+        dtmCatalago.setColumnIdentifiers(tlbCabecera);
+        tblCatalago.setModel(dtmCatalago);
+    }
+    private void setDatos() {
+        Object[] datos = new Object[dtmCatalago.getColumnCount()];
+        int i = 0;
+        dtmCatalago.setRowCount(0);
+        for (Estado estado : catalago) {
+            datos[0] = i;
+            datos[1] = estado.getId();
+            datos[2] = estado.getNombreEstado();
+            datos[3] = estado.getNombreMunicipio();
+            i++;
+            dtmCatalago.addRow(datos);
+        }
+        tblCatalago.setModel(dtmCatalago);
     }
 
     /**
@@ -37,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelFondo = new javax.swing.JPanel();
-        recNo = new javax.swing.JLabel();
+        cartelrecNo = new javax.swing.JLabel();
         cartelId = new javax.swing.JLabel();
         cartelEstado = new javax.swing.JLabel();
         cartelMunicipio = new javax.swing.JLabel();
@@ -56,12 +90,16 @@ public class Principal extends javax.swing.JFrame {
 
         jPanelFondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        recNo.setText("RECNO:");
+        cartelrecNo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cartelrecNo.setText("RECNO:");
 
+        cartelId.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cartelId.setText("ID:");
 
+        cartelEstado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cartelEstado.setText("ESTADO:");
 
+        cartelMunicipio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cartelMunicipio.setText("MUNICIPIO:");
 
         tblCatalago.setModel(new javax.swing.table.DefaultTableModel(
@@ -77,80 +115,114 @@ public class Principal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCatalago);
 
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAceptar.setText("ACEPTAR");
+        btnAceptar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseClicked(evt);
+            }
+        });
 
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseClicked(evt);
+            }
+        });
 
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
 
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
+        btnActualizar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFondoLayout = new javax.swing.GroupLayout(jPanelFondo);
         jPanelFondo.setLayout(jPanelFondoLayout);
         jPanelFondoLayout.setHorizontalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cartelEstado)
                             .addComponent(cartelMunicipio)
-                            .addComponent(cartelId)
-                            .addComponent(recNo))
+                            .addComponent(cartelId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRecNo)
                             .addComponent(txtId)
                             .addComponent(txtEstado)
-                            .addComponent(txtMunicipio, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cartelrecNo)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFondoLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(recNo)
-                    .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(btnAceptar)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cartelrecNo))
+                            .addGroup(jPanelFondoLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnAceptar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpiar))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cartelId))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar)
-                    .addComponent(cartelEstado)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cartelMunicipio)
-                    .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cartelEstado)
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cartelMunicipio)
+                            .addComponent(txtMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFondoLayout.createSequentialGroup()
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminar)
-                        .addGap(34, 34, 34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar)
-                        .addGap(139, 139, 139))))
+                        .addGap(167, 167, 167))
+                    .addGroup(jPanelFondoLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(27, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,6 +239,66 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(this.txtId.getText().trim());
+        int recNo = Integer.parseInt(this.txtRecNo.getText().trim());
+        String nombreEstado = this.txtEstado.getText();
+        String nombreMunicipio = this.txtMunicipio.getText();
+
+        if (recNo == -1) {
+            Estado.añadir(id, nombreEstado,nombreMunicipio);
+        } else {
+            System.out.println("Actualizando datos...");
+            Estado.actualizar(recNo, id, nombreEstado,nombreMunicipio);
+            this.btnActualizar.setSelected(false);
+            System.out.println(catalago);
+        }
+        setDatos();
+        limpiarCampos(); 
+        
+    }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        int filaActual = tblCatalago.getSelectedRow();
+        System.out.println(filaActual);
+        if (btnActualizar.isSelected()) {
+            if (filaActual != -1) {
+                System.out.println(dtmCatalago.getValueAt(filaActual, 0));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 1));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 2));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 3));
+
+                this.txtRecNo.setText("" + dtmCatalago.getValueAt(filaActual, 0));
+                this.txtId.setText("" + dtmCatalago.getValueAt(filaActual, 1));
+                this.txtEstado.setText("" + dtmCatalago.getValueAt(filaActual, 2));
+                this.txtMunicipio.setText("" + dtmCatalago.getValueAt(filaActual, 3));
+            } else {
+                System.out.println("Debe seleccionar un registro..");
+                this.btnActualizar.setSelected(false);
+            }
+        } else{
+            limpiarCampos();  
+        }
+    }//GEN-LAST:event_btnActualizarMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+
+        int filaActual = tblCatalago.getSelectedRow();
+        System.out.println(filaActual);
+        if(filaActual != -1){
+        System.out.println(catalago);
+        Estado.eliminar(filaActual);
+        setDatos();
+        System.out.println(catalago);
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
+        // TODO add your handling code here:
+        limpiarCampos();
+    }//GEN-LAST:event_btnLimpiarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -179,9 +311,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel cartelEstado;
     private javax.swing.JLabel cartelId;
     private javax.swing.JLabel cartelMunicipio;
+    private javax.swing.JLabel cartelrecNo;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel recNo;
     private javax.swing.JTable tblCatalago;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtId;
