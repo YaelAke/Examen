@@ -78,4 +78,174 @@ public class Estado {
         catalago.remove(id);
     }
   ```
+ 
+ <h1>SE CREA UN JFRAME Y SE AÑADE UN JTABEL</h1>
+ Dentro del frame, crearemos un jTabel, asi como un boton para aceptar, limpiar, eliminar y actualizar(ToggleButton), y a su vez cuatro carteles acompañados de un jtextFiel.Tambien en nuestra clase Main llamada "Catalago" crearemos una instancia de la clase "Principal" para hacer visible el GUI en el centro de la pantalla.<br>
+ 
+```
+public class Catalago {
 
+    public static Principal principal = new Principal();
+
+    public static void main(String[] args) {
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+    }
+}
+```
+ 
+![](https://github.com/YaelAke/Imagenes/blob/f0d97841d3ee361b5f0c6ad89fc48b8abb47c248/Captura%20de%20pantalla%202023-04-30%20051217.png)
+
+ <h1>LE ASIGNAREMOS UN MODELO A NUESTRO JTABEL</h1>
+ Le añadiremos un modelo a nuestro jTabel que se define por un arreglo de cadenas para que tenga 4 colmunas conformadas cada una por "No","Id","Estado",y "Municipio"
+ 
+ ```
+     private void setModelo() {
+        String[] tlbCabecera = {"No", "ID", "MUNICIPIOS", "ESTADOS"};
+        dtmCatalago.setColumnIdentifiers(tlbCabecera);
+        tblCatalago.setModel(dtmCatalago);
+    }
+ 
+ ```
+ 
+ ![](https://github.com/YaelAke/Imagenes/blob/2f014389ee18530066bc4ded0027a9082a29a82d/Captura%20de%20pantalla%202023-04-30%20055039.png)
+ 
+ <h1>ESTABLECERER LOS DATOS DE LA TABLA </h1>
+ Se define un método llamado setDatos() que se encarga de establecer los datos de una tabla con nuestra informacion de estados y municipios. Primero, se establece el  número de filas de la tabla en cero para poder borrar cualquier información anterior. Luego, se itera a través de cada objeto Estado en la lista catalago y se establece los  valores de la columna en un arreglo de objetos. Después, se agrega cada fila a la tabla mediante el método addRow(). Finalmente, estblecemos el modelo de datos de la tabla con dtmCatalago.
+ 
+ ```
+     private void setDatos() {
+        Object[] datos = new Object[dtmCatalago.getColumnCount()];
+        int i = 0;
+        dtmCatalago.setRowCount(0);
+        for (Estado estado : catalago) {
+            datos[0] = i;
+            datos[1] = estado.getId();
+            datos[2] = estado.getNombreEstado();
+            datos[3] = estado.getNombreMunicipio();
+            i++;
+            dtmCatalago.addRow(datos);
+        }
+        tblCatalago.setModel(dtmCatalago);
+    }
+ ```
+ 
+  <h1>FUNCIONALIDAD A NUESTROS BOTONES</h1>
+  Empezaremos con el boton de "Aceptar" donde empezaremos añadiendole un evento de mouseClicket donde le asignaremos una función que se encargara de actualizar los campos de texto en nuestro jTabel según la fila que este seleccionada donde con un "if" si el botón de "actualización" está seleccionado y se ha seleccionado una fila en la tabla, se actualizan los campos de texto con los valores de las celdas de la fila seleccionada. Si no se ha seleccionado ninguna fila, se muestra un mensaje de error en la consola y se desactiva el botón de "actualización". Si el botón de "actualización" no está seleccionado, se llamará a una función para limpiar los campos de texto en la interfaz de usuario.
+
+```
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {                                           
+        int filaActual = tblCatalago.getSelectedRow();
+        System.out.println(filaActual);
+        if (btnActualizar.isSelected()) {
+            if (filaActual != -1) {
+                System.out.println(dtmCatalago.getValueAt(filaActual, 0));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 1));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 2));
+                System.out.println(dtmCatalago.getValueAt(filaActual, 3));
+
+                this.txtRecNo.setText("" + dtmCatalago.getValueAt(filaActual, 0));
+                this.txtId.setText("" + dtmCatalago.getValueAt(filaActual, 1));
+                this.txtEstado.setText("" + dtmCatalago.getValueAt(filaActual, 2));
+                this.txtMunicipio.setText("" + dtmCatalago.getValueAt(filaActual, 3));
+            } else {
+                System.out.println("Debe seleccionar un registro..");
+                this.btnActualizar.setSelected(false);
+            }
+        } else{
+            limpiarCampos();  
+        }
+    }     
+    
+```
+
+Continuando con el boton "Eliminar" donde igual con un mouseClicket le asignaremos una función que se encarga de eliminar una fila seleccionada de nuestro Jtabel donde igual con un condicional "if", si se ha seleccionado una fila en la tabla, se elimina esa fila de la tabla y se actualizan los datos de la tabla mediante la llamada al método "setDatos()". Finalmente, se imprime en la consola el contenido actualizado de la tabla de catálogo.
+
+```
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {                                         
+
+        int filaActual = tblCatalago.getSelectedRow();
+        System.out.println(filaActual);
+        if(filaActual != -1){
+        //dtmMunicipios.removeRow(filaActual);
+        System.out.println(catalago);
+        Estado.eliminar(filaActual);
+        setDatos();
+        System.out.println(catalago);
+        }
+    }  
+````
+
+El boton "Limpiar" unicamente  llama al metodo limpiarDatos() donde con un setText le mandamos un mensaje vacio a todos los jTextFiel que tenemos en nuestro frame
+
+```
+    private void limpiarCampos() {
+        this.txtId.setText("");
+        this.txtNombre.setText("");
+        this.txtNumero.setText("-1");
+    }
+     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        limpiarCampos();
+    }   
+```
+Por ultimo nuestro boton "Aceptar" con un evento de mouseClicket que sirve para agregar o actualizar. por medio de un "if" validamos si el valor de recNo es -1, se agrega un nuevo estado con los valores de id, nombreEstado y nombreMunicipio proporcionados en los campos de texto. Si el valor de recNo es distinto a -1, se actualizan los datos del estado correspondiente a recNo con los valores de id, nombreEstado y nombreMunicipio proporcionados en los campos de texto. Se llama al método "setDatos()" para actualizar la tabla con los nuevos datos y al método "limpiarCampos()" para limpiar los campos de texto de los jTextField
+
+
+```
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+        int id = Integer.parseInt(this.txtId.getText().trim());
+        int recNo = Integer.parseInt(this.txtRecNo.getText().trim());
+        String nombreEstado = this.txtEstado.getText();
+        String nombreMunicipio = this.txtMunicipio.getText();
+
+        if (recNo == -1) {
+            Estado.añadir(id, nombreEstado,nombreMunicipio);
+        } else {
+            System.out.println("Actualizando datos...");
+            Estado.actualizar(recNo, id, nombreEstado,nombreMunicipio);
+            this.btnActualizar.setSelected(false);
+            System.out.println(catalago);
+        }
+        setDatos();
+        limpiarCampos(); 
+        
+    }  
+```
+  <h1>RESULTADOS</h1>
+  Se puede observar como se inserta un nuevo estado y municipio junto con su id
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/567291f4b898b8a16acdba57d4de1dfbc7e9327f/Captura%20de%20pantalla%202023-04-30%20073659.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/567291f4b898b8a16acdba57d4de1dfbc7e9327f/Captura%20de%20pantalla%202023-04-30%20073714.png)
+  
+  Se pude observar como se eliminar en un municipio al seleccionarlo y darle eliminar
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/7fd4e193d9ec8362f42482fab1ec4739d3acc19d/Captura%20de%20pantalla%202023-04-30%20074235.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/7fd4e193d9ec8362f42482fab1ec4739d3acc19d/Captura%20de%20pantalla%202023-04-30%20074254.png)
+  
+  Tambien podemos ver que al seleccionar y darle a "actualizar" se nos llenan los campos con la informacion para poder actualizarla, luego al darle aceptar aparece en la columna con los datos actualizados
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074626.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074646.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074714.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074725.png)
+  
+  Al seleccionar el boton "Limpiar" podemos observar que los datos que se encontraban en nuestros jTextField quedan vacios
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/2dec6a9ad93b54163d2777cf1e3bb8bae8c75401/Captura%20de%20pantalla%202023-04-30%20075155.png)
+    
+  ![](https://github.com/YaelAke/Imagenes/blob/2dec6a9ad93b54163d2777cf1e3bb8bae8c75401/Captura%20de%20pantalla%202023-04-30%20075210.png)
+  
+  En nuestro centro de comandos podemos tener de lectura como cambia cuando insertamos, eliminamos o actualizamos alguno de nuestros datos
+  
+     
+  ![](https://github.com/YaelAke/Imagenes/blob/58f4db25980cbc1db4b899aad91ae5f39cbce0a3/Captura%20de%20pantalla%202023-04-30%20080112.png)
+  
+  
+  
+  
