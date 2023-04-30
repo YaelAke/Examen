@@ -214,4 +214,38 @@ Por ultimo nuestro boton "Aceptar" con un evento de mouseClicket que sirve para 
 ```
   <h1>RESULTADOS</h1>
   Se puede observar como se inserta un nuevo estado y municipio junto con su id
-
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/567291f4b898b8a16acdba57d4de1dfbc7e9327f/Captura%20de%20pantalla%202023-04-30%20073659.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/567291f4b898b8a16acdba57d4de1dfbc7e9327f/Captura%20de%20pantalla%202023-04-30%20073714.png)
+  
+  Se pude observar como se eliminar en un municipio al seleccionarlo y darle eliminar
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/7fd4e193d9ec8362f42482fab1ec4739d3acc19d/Captura%20de%20pantalla%202023-04-30%20074235.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/7fd4e193d9ec8362f42482fab1ec4739d3acc19d/Captura%20de%20pantalla%202023-04-30%20074254.png)
+  
+  Tambien podemos ver que al seleccionar y darle a "actualizar" se nos llenan los campos con la informacion para poder actualizarla, luego al darle aceptar aparece en la columna con los datos actualizados
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074626.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074646.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074714.png)
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/c73b0fc954b63b873d26cb4dbe76bde4b52b8183/Captura%20de%20pantalla%202023-04-30%20074725.png)
+  
+  Al seleccionar el boton "Limpiar" podemos observar que los datos que se encontraban en nuestros jTextField quedan vacios
+  
+  ![](https://github.com/YaelAke/Imagenes/blob/2dec6a9ad93b54163d2777cf1e3bb8bae8c75401/Captura%20de%20pantalla%202023-04-30%20075155.png)
+    
+  ![](https://github.com/YaelAke/Imagenes/blob/2dec6a9ad93b54163d2777cf1e3bb8bae8c75401/Captura%20de%20pantalla%202023-04-30%20075210.png)
+  
+  En nuestro centro de comandos podemos tener de lectura como cambia cuando insertamos, eliminamos o actualizamos alguno de nuestros datos
+  
+     
+  ![](https://github.com/YaelAke/Imagenes/blob/58f4db25980cbc1db4b899aad91ae5f39cbce0a3/Captura%20de%20pantalla%202023-04-30%20080112.png)
+  
+  
+  
+  
