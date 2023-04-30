@@ -78,4 +78,7 @@ public class Estado {
         catalago.remove(id);
     }
   ```
+ 
+ <h1>SE CREA UN JFRAME Y SE AÑADE UN JTABEL</h1>
+ Dentro del frame, crearemos un jTabel, asi como un boton para aceptar, limpiar, eliminar y actualizar(ToggleButton), y a su vez cuatro carteles acompañados de un jtextFiel
 
