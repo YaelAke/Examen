@@ -212,5 +212,6 @@ Por ultimo nuestro boton "Aceptar" con un evento de mouseClicket que sirve para 
         
     }  
 ```
-
+  <h1>RESULTADOS</h1>
+  Se puede observar como se inserta un nuevo estado y municipio junto con su id
 
