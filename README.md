@@ -80,5 +80,32 @@ public class Estado {
   ```
  
  <h1>SE CREA UN JFRAME Y SE AÑADE UN JTABEL</h1>
- Dentro del frame, crearemos un jTabel, asi como un boton para aceptar, limpiar, eliminar y actualizar(ToggleButton), y a su vez cuatro carteles acompañados de un jtextFiel
+ Dentro del frame, crearemos un jTabel, asi como un boton para aceptar, limpiar, eliminar y actualizar(ToggleButton), y a su vez cuatro carteles acompañados de un jtextFiel.Tambien en nuestra clase Main llamada "Catalago" crearemos una instancia de la clase "Principal" para hacer visible el GUI en el centro de la pantalla.<br>
+ 
+```
+public class Catalago {
+
+    public static Principal principal = new Principal();
+
+    public static void main(String[] args) {
+        principal.setVisible(true);
+        principal.setLocationRelativeTo(null);
+    }
+}
+```
+ 
+![](https://github.com/YaelAke/Imagenes/blob/f0d97841d3ee361b5f0c6ad89fc48b8abb47c248/Captura%20de%20pantalla%202023-04-30%20051217.png)
+
+ <h1>LE ASIGNAREMOS UN MODELO A NUESTRO JTABEL</h1>
+ Le añadiremos un modelo a nuestro jTabel que se define por un arreglo de cadenas para que tenga 4 colmunas conformadas cada una por "No","Id","Estado",y "Municipio"
+ 
+ ```
+     private void setModelo() {
+        String[] tlbCabecera = {"No", "ID", "MUNICIPIOS", "ESTADOS"};
+        dtmCatalago.setColumnIdentifiers(tlbCabecera);
+        tblCatalago.setModel(dtmCatalago);
+    }
+ 
+ ```
+
 
