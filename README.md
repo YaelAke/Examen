@@ -131,7 +131,7 @@ public class Catalago {
  ```
  
   <h1>FUNCIONALIDAD A NUESTROS BOTONES</h1>
-  Empezaremos con el boton de "Aceptar" donde empezaremos añadiendole un evento de mouseClicket donde le asignaremos una función que se encargara de actualizar los campos de texto en nuestro jTabel según la fila que este seleccionada donde con un "if" si el botón de "actualización" está seleccionado y se ha seleccionado una fila en la tabla, se actualizan los campos de texto con los valores de las celdas de la fila seleccionada. Si no se ha seleccionado ninguna fila, se muestra un mensaje de error en la consola y se desactiva el botón de "actualización". Si el botón de "actualización" no está seleccionado, se llamará a una función para limpiar los campos de texto en la interfaz de usuario.
+  Empezaremos con el boton de "Actualizar" donde empezaremos añadiendole un evento de mouseClicket donde le asignaremos una función que se encargara de actualizar los campos de texto en nuestro jTabel según la fila que este seleccionada donde con un "if" si el botón de "actualización" está seleccionado y se ha seleccionado una fila en la tabla, se actualizan los campos de texto con los valores de las celdas de la fila seleccionada. Si no se ha seleccionado ninguna fila, se muestra un mensaje de error en la consola y se desactiva el botón de "actualización". Si el botón de "actualización" no está seleccionado, se llamará a una función para limpiar los campos de texto en la interfaz de usuario.
 
 ```
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {                                           
