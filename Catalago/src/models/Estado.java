@@ -4,6 +4,8 @@
  */
 package models;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Yael
@@ -54,4 +56,21 @@ public class Estado {
         return "Catalago{" + "id=" + id + ", estado=" + nombreEstado + "municipio" + nombreMunicipio + '}';
 
     }
+    public static ArrayList<Estado> catalago = new ArrayList<>();
+
+    public static void añadir(int id, String nombreEstado, String nombreMunicipio) {
+        catalago.add(new Estado(id, nombreEstado, nombreMunicipio));
+    }
+
+    public static void actualizar(int recNo, int id, String nombreEstado, String nombreMunicipio) {
+        catalago.get(recNo).setId(id);
+        catalago.get(recNo).setNombreEstado(nombreEstado);
+        catalago.get(recNo).setNombreMunicipio(nombreMunicipio);
+
+    }
+
+    public static void eliminar(int id) {
+        catalago.remove(id);
+    }
+    
 }
