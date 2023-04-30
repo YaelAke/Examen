@@ -52,4 +52,30 @@ public class Estado {
     }
 }
 ```
+<h1>SE CREA UN ARRAYLIST DE OBJETOS DENTRO DE LA MISMA CLASE ESTADO</h1>
+
+```
+public class Estado {
+    static ArrayList<Estado> catalogo = new ArrayList<>();
+```
+<h1>SE CREAN LOS METODOS DE AÑADIR, ACTUALIZAR Y ELIMINAR DENTRO DE LA MISMA CLASE ESTADO</h1>
+
+```
+    public static ArrayList<Estado> catalago = new ArrayList<>();
+
+    public static void añadir(int id, String nombreEstado, String nombreMunicipio) {
+        catalago.add(new Estado(id, nombreEstado, nombreMunicipio));
+    }
+
+    public static void actualizar(int recNo, int id, String nombreEstado, String nombreMunicipio) {
+        catalago.get(recNo).setId(id);
+        catalago.get(recNo).setNombreEstado(nombreEstado);
+        catalago.get(recNo).setNombreMunicipio(nombreMunicipio);
+
+    }
+
+    public static void eliminar(int id) {
+        catalago.remove(id);
+    }
+  ```
 
