@@ -101,7 +101,7 @@ public class Catalago {
  
  ```
      private void setModelo() {
-        String[] tlbCabecera = {"No", "ID", "MUNICIPIOS", "ESTADOS"};
+        String[] tlbCabecera = {"No", "ID", "ESTADO", "MUNICIPIO"};
         dtmCatalago.setColumnIdentifiers(tlbCabecera);
         tblCatalago.setModel(dtmCatalago);
     }
