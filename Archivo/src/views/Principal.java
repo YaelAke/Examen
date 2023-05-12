@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -163,6 +164,9 @@ public class Principal extends javax.swing.JFrame {
         } else {
             System.out.println("Error al borrar el archivo");
         }
+        jsonArchivo.setText("");
+        jsonEntrada.setText("");
+        JOptionPane.showMessageDialog(null,"ARCHIVO BORRADO EXITOSAMENTE");
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     /**
