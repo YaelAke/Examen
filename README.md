@@ -46,12 +46,60 @@ Finalmente se actualiza el texto de nuestro jTextArea llamado "jsonEntrada" con 
 
 ![](https://github.com/YaelAke/Imagenes/blob/07e442dcf114a2530c3be03718f905358937357f/Captura%20de%20pantalla%202023-05-11%20232757.png)
 
+# FUNCIONALIDAD AL BOTON "GUARDAR"
+Empezamos añadiendole un evento a nuestro boton con un mouseClicket, luego en el evento creamos un objeto de la clase "File" llamado archivo, utilizando la ruta en nuestro jTextArea "jsonEntrada", luego creamos un objeto de la clase PrintWriter llamado "escribir" para escribir en el archivo<br>
+Se intentara escribir el contenido de nuestro jTextArea "jsonEntrada" en el archivo utilizando el método print de PrintWriter y se cierra el objeto escribir para asegurarse de que los datos se escriban correctamente en nuestro archivo<br>
+Finalmenre si ocurre una excepción de tipo FileNotFoundException (archivo no encontrado) se captura la excepción y se registra un mensaje de error en nuestro comando
 
+``` 
+    private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {                                        
+        // TODO add your handling code here:
+        System.out.println("Inico guardar archivo");
+        File archivo = new File(this.jsonArchivo.getText());
+        PrintWriter escribir;
+        try {
+            escribir = new PrintWriter(archivo);
+            escribir.print(jsonEntrada.getText());
+            escribir.close();
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        System.out.println("Archivo guardado");
+    }   
 
+``` 
 
+![](https://github.com/YaelAke/Imagenes/blob/ba5ea4b6f76a18911fb191e808c79ba6f0597e09/Captura%20de%20pantalla%202023-05-11%20234558.png)
 
+![](https://github.com/YaelAke/Imagenes/blob/ba5ea4b6f76a18911fb191e808c79ba6f0597e09/Captura%20de%20pantalla%202023-05-11%20234623.png)
 
+![](https://github.com/YaelAke/Imagenes/blob/ba5ea4b6f76a18911fb191e808c79ba6f0597e09/Captura%20de%20pantalla%202023-05-11%20234726.png)
 
+# FUNCIONALIDAD AL BOTON "ElIMINAR"
+Empezamos añadiendole un evento a nuestro boton con un mouseClicket, luego en el evento creamos un objeto de la clase "File", utilizando la ruta en nuestro jTextArea "jsonEntrada y la ruta del archivo a eliminar se obtiene a través del método getText() del jTextField "jsonArchivo"<br>
+Se intenta eliminar el archivo utilizando el método delete() del objeto archivo. Este método devuelve true si el archivo se elimina exitosamente y false en caso contrario<br>
+Si el archivo se elimina exitosamente entonces se imprime en la consola el mensaje "Archivo borrado" junto con el nombre del archivo eliminado que es obtenido a través del método getName() del objeto archivo y si ocurre algún error al intentar borrar el archivo, se imprime en la consola el mensaje "Error al borrar el archivo".
+
+``` 
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {                                         
+        // TODO add your handling code here:
+        System.out.println("Inico eliminar archivo");
+        File archivo = new File(this.jsonArchivo.getText());
+        if (archivo.delete()) {
+            System.out.println("Archivo borrado: " + archivo.getName());
+        } else {
+            System.out.println("Error al borrar el archivo");
+        }
+        jsonArchivo.setText("");
+        jsonEntrada.setText("");
+        JOptionPane.showMessageDialog(null,"ARCHIVO BORRADO EXITOSAMENTE");
+    }     
+ ```  
+![](https://github.com/YaelAke/Imagenes/blob/140cf5be8e9d69746568e06688de66fc2fd7412f/Captura%20de%20pantalla%202023-05-12%20000624.png)
+ 
+![](https://github.com/YaelAke/Imagenes/blob/140cf5be8e9d69746568e06688de66fc2fd7412f/Captura%20de%20pantalla%202023-05-12%20000650.png)
+ 
+![](https://github.com/YaelAke/Imagenes/blob/140cf5be8e9d69746568e06688de66fc2fd7412f/Captura%20de%20pantalla%202023-05-12%20000857.png)
 
 
 
