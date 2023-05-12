@@ -1,1 +1,2 @@
-# Archivo
+# SE CREA EL MODELO DE LA CLASE PRINCIPAL
+Creamos un jFrame donde posteriormente añadiremos un jTextArea llamado jsonEntrada que sera el encargado de mostrar el contenido de nuestro archivo json, posteriormente se añade un jTextField con el nombre de "Archivo" que servira para mostrar la ruta y el nombre del archivo json que seleccionamos, finalmente añadimos tres botones, un boton llamado "archivo" cuya funcion sera buscar el archivo, otro boton llamado "guardar" que guardara nuestras ediciones
