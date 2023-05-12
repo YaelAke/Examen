@@ -38,6 +38,19 @@ Finalmente se actualiza el texto de nuestro jTextArea llamado "jsonEntrada" con 
      
 ``` 
 
+![](https://github.com/YaelAke/Imagenes/blob/07e442dcf114a2530c3be03718f905358937357f/Captura%20de%20pantalla%202023-05-11%20232715.png)
+
+![](https://github.com/YaelAke/Imagenes/blob/07e442dcf114a2530c3be03718f905358937357f/Captura%20de%20pantalla%202023-05-11%20232729.png)
+
+![](https://github.com/YaelAke/Imagenes/blob/07e442dcf114a2530c3be03718f905358937357f/Captura%20de%20pantalla%202023-05-11%20232741.png)
+
+![](https://github.com/YaelAke/Imagenes/blob/07e442dcf114a2530c3be03718f905358937357f/Captura%20de%20pantalla%202023-05-11%20232757.png)
+
+
+
+
+
+
 
 
 
