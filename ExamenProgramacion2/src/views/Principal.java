@@ -4,11 +4,12 @@
  */
 package views;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import javax.swing.table.DefaultTableModel;
 import models.TablaPeriodica;
 import static models.TablaPeriodica.tabla;
-
-
 
 /**
  *
@@ -22,23 +23,39 @@ public class Principal extends javax.swing.JFrame {
             return false;
         }
     };
- 
+
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
+        this.txtRecNo.setText("-1");
+        this.txtRecNo.setVisible(false);
+        this.cartelrecNo.setVisible(false);
+        tblElementos.repaint();
+        TablaPeriodica.llenar();
         setModelo();
         setDatos();
+        
 
+    }
+
+    private void limpiarCampos() {
+        this.txtId.setText("");
+        this.txtMasa.setText("");
+        this.txtNombre.setText("");
+        this.txtNumero.setText("");
+        this.txtSimbolo.setText("");
+        this.txtColor.setText("");
+        this.txtRecNo.setText("-1");
     }
 
     private void setModelo() {
-        String[] tlbCabecera = {"No", "ID", "MASA ATOMICA", "NUMERO ATOMICO", "SIMBOLO QUIMICO", "NOMBRE", "COLOR"};
+        String[] tlbCabecera = {"No", "ID", "MASA", "N. ATOMICO", "SIMBOLO", "NOMBRE", "COLOR"};
         dtmTabla.setColumnIdentifiers(tlbCabecera);
         tblElementos.setModel(dtmTabla);
     }
-    
+
     private void setDatos() {
         Object[] datos = new Object[tblElementos.getColumnCount()];
         int i = 0;
@@ -56,8 +73,6 @@ public class Principal extends javax.swing.JFrame {
         }
         tblElementos.setModel(dtmTabla);
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +103,8 @@ public class Principal extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JToggleButton();
         btnExportar = new javax.swing.JButton();
+        carterlNumero = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +191,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        carterlNumero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        carterlNumero.setText("N. ATOMICO");
+
         javax.swing.GroupLayout jPanelFondoLayout = new javax.swing.GroupLayout(jPanelFondo);
         jPanelFondo.setLayout(jPanelFondoLayout);
         jPanelFondoLayout.setHorizontalGroup(
@@ -187,7 +207,8 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(cartelMasa)
                             .addComponent(cartelId)
                             .addComponent(cartelSimbolo)
-                            .addComponent(cartelColor))
+                            .addComponent(cartelColor)
+                            .addComponent(carterlNumero))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -195,20 +216,20 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtMasa, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(cartelrecNo)
                         .addGap(18, 18, 18)
                         .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(47, Short.MAX_VALUE))
+                        .addContainerGap(57, Short.MAX_VALUE))
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExportar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -247,8 +268,12 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txtSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cartelColor)
-                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carterlNumero)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartelColor))
                 .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,7 +286,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(26, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,31 +306,94 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        // TODO add your handling code here:
+        int id = Integer.parseInt(this.txtId.getText().trim());
+        int recNo = Integer.parseInt(this.txtRecNo.getText().trim());
+        String masaAtomica = this.txtMasa.getText();
+        String numeroAtomico = this.txtNumero.getText();
+        String simboloQuimico = this.txtSimbolo.getText();
+        String nombre = this.txtNombre.getText();
+        String color = this.txtColor.getText();
 
-        
+        if (recNo == -1) {
+            TablaPeriodica.añadir(id, masaAtomica, numeroAtomico, simboloQuimico, nombre, color);
+        } else {
+            System.out.println("Actualizando datos...");
+            TablaPeriodica.actualizar(recNo, id, masaAtomica, numeroAtomico, simboloQuimico, nombre, color);
+            this.btnActualizar.setSelected(false);
+            System.out.println(tabla);
+        }
+        setDatos();
+        limpiarCampos();
+
+
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        int filaActual = tblElementos.getSelectedRow();
+        System.out.println(filaActual);
+        if (btnActualizar.isSelected()) {
+            if (filaActual != -1) {
+                System.out.println(dtmTabla.getValueAt(filaActual, 0));
+                System.out.println(dtmTabla.getValueAt(filaActual, 1));
+                System.out.println(dtmTabla.getValueAt(filaActual, 2));
+                System.out.println(dtmTabla.getValueAt(filaActual, 3));
+                System.out.println(dtmTabla.getValueAt(filaActual, 5));
+                System.out.println(dtmTabla.getValueAt(filaActual, 6));
 
+                this.txtRecNo.setText("" + dtmTabla.getValueAt(filaActual, 0));
+                this.txtId.setText("" + dtmTabla.getValueAt(filaActual, 1));
+                this.txtMasa.setText("" + dtmTabla.getValueAt(filaActual, 2));
+                this.txtNumero.setText("" + dtmTabla.getValueAt(filaActual, 3));
+                this.txtSimbolo.setText("" + dtmTabla.getValueAt(filaActual, 4));
+                this.txtNombre.setText("" + dtmTabla.getValueAt(filaActual, 5));
+                this.txtColor.setText("" + dtmTabla.getValueAt(filaActual, 6));
+            } else {
+                System.out.println("Debe seleccionar un registro..");
+                this.btnActualizar.setSelected(false);
+            }
+        } else {
+            limpiarCampos();
+        }
     }//GEN-LAST:event_btnActualizarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-
+        int filaActual = tblElementos.getSelectedRow();
+        System.out.println(filaActual);
+        if (filaActual != -1) {
+            System.out.println(tabla);
+            TablaPeriodica.eliminar(filaActual);
+            setDatos();
+            System.out.println(tabla);
+        }
 
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseClicked
         // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExportarMouseClicked
         // TODO add your handling code here:
+        System.out.println("Inico guardar archivo");
+        File archivo = new File("C:\\Users\\yaelc\\Documents\\Test\\tblTabla.txt");
+        PrintWriter escribir;
+        try {
+            escribir = new PrintWriter(archivo);
+            for (TablaPeriodica tablaperiodica : tabla) {
+                escribir.print(tablaperiodica.toString() + "\n");
+            }
+            escribir.close();
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        System.out.println("Archivo guardado");
 
     }//GEN-LAST:event_btnExportarMouseClicked
 
     private void txtSimboloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSimboloActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_txtSimboloActionPerformed
 
     /**
@@ -324,6 +412,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel cartelNombre;
     private javax.swing.JLabel cartelSimbolo;
     private javax.swing.JLabel cartelrecNo;
+    private javax.swing.JLabel carterlNumero;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblElementos;
@@ -331,6 +420,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMasa;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRecNo;
     private javax.swing.JTextField txtSimbolo;
     // End of variables declaration//GEN-END:variables
