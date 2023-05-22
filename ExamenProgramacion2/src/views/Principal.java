@@ -5,6 +5,8 @@
 package views;
 
 import javax.swing.table.DefaultTableModel;
+import models.TablaPeriodica;
+import static models.TablaPeriodica.tabla;
 
 
 
@@ -26,9 +28,35 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        setModelo();
+        setDatos();
 
     }
+
+    private void setModelo() {
+        String[] tlbCabecera = {"No", "ID", "MASA ATOMICA", "NUMERO ATOMICO", "SIMBOLO QUIMICO", "NOMBRE", "COLOR"};
+        dtmTabla.setColumnIdentifiers(tlbCabecera);
+        tblElementos.setModel(dtmTabla);
+    }
     
+    private void setDatos() {
+        Object[] datos = new Object[tblElementos.getColumnCount()];
+        int i = 0;
+        dtmTabla.setRowCount(0);
+        for (TablaPeriodica tablaperiodica : tabla) {
+            datos[0] = i;
+            datos[1] = tablaperiodica.getId();
+            datos[2] = tablaperiodica.getMasaAtomica();
+            datos[3] = tablaperiodica.getNumeroAtomico();
+            datos[4] = tablaperiodica.getSimboloQuimico();
+            datos[5] = tablaperiodica.getNombre();
+            datos[6] = tablaperiodica.getColor();
+            i++;
+            dtmTabla.addRow(datos);
+        }
+        tblElementos.setModel(dtmTabla);
+    }
+
 
 
     /**
@@ -48,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
         cartelColor = new javax.swing.JLabel();
         cartelSimbolo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCatalago = new javax.swing.JTable();
+        tblElementos = new javax.swing.JTable();
         txtRecNo = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
@@ -83,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
         cartelSimbolo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cartelSimbolo.setText("SIMBOLO");
 
-        tblCatalago.setModel(new javax.swing.table.DefaultTableModel(
+        tblElementos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -94,7 +122,7 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblCatalago);
+        jScrollPane1.setViewportView(tblElementos);
 
         txtSimbolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +166,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnExportar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnExportar.setText("EXPORTAR");
         btnExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -171,19 +200,19 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(cartelrecNo)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRecNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(47, Short.MAX_VALUE))
                     .addGroup(jPanelFondoLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGroup(jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExportar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         jPanelFondoLayout.setVerticalGroup(
             jPanelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +326,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel cartelrecNo;
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCatalago;
+    private javax.swing.JTable tblElementos;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtMasa;
