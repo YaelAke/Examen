@@ -9,7 +9,12 @@ package models;
  * @author Yael
  */
 public class TablaPeriodica {
-
+    private int id;
+    private String masaAtomica;
+    private String numeroAtomico;
+    private String simboloQuimico;
+    private String nombre;
+    private String color;
     
     public TablaPeriodica(){
         
